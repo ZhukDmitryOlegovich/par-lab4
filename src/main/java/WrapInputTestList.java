@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.util.List;
 
 public class WrapInputTestList {
@@ -6,6 +8,7 @@ public class WrapInputTestList {
     public final String functionName;
     public final List<InputTest> inputTestList;
 
+    @JsonCreator
     public WrapInputTestList(String packageId, String jsScript, String functionName, List<InputTest> inputTestList) {
         this.packageId = packageId;
         this.jsScript = jsScript;
