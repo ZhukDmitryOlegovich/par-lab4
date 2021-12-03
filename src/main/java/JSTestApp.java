@@ -22,8 +22,8 @@ public class JSTestApp extends AllDirectives {
         final Http http = Http.get(actorSystem);
         final ActorMaterializer materializer = ActorMaterializer.create(actorSystem);
         JSTestApp instance = new JSTestApp();
-        final Flow<HttpRequest, HttpResponse, NotUsed> responseNotUsedFlow =
-                instance.
+//        final Flow<HttpRequest, HttpResponse, NotUsed> responseNotUsedFlow =
+//                instance.
     }
 
     private Route createRoute(ActorRef actorRouter) {
