@@ -8,33 +8,19 @@ import javax.script.ScriptException;
 public class ActorTester extends AbstractActor {
     private static final String SCRIPT_ENGINE_NAME = "nashorn";
 
-    static public ResultExec execJS(
+    static private String execJS(
             String jscript, String functionName, Object[] params
-    ) {
-        try {
+    ) throws ScriptException, NoSuchMethodException {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName(SCRIPT_ENGINE_NAME);
             engine.eval(jscript);
-            return new ResultExec(
-                    true,
-                    ((Invocable) engine).invokeFunction(functionName, params).toString()
-            );
-        } catch (ScriptException | NoSuchMethodException e) {
-            return new ResultExec(false, null);
-        }
+            return ((Invocable) engine).invokeFunction(functionName, params).toString();
     }
 
     public ResultTest runTest(String jscript, String functionName, InputTest inputTest) {
-        ResultExec result = execJS(jscript, functionName, inputTest.params);
-        return new ResultTest(inputTest, result.result, !result.first);
-    }
-
-    static class ResultExec {
-        public final boolean correct;
-        public final String result;
-
-        public ResultExec(boolean correct, String result) {
-            this.correct = correct;
-            this.result = result;
+        try {
+            return new ResultTest(inputTest, execJS(jscript, functionName, inputTest.params), false);
+        } catch (ScriptException | NoSuchMethodException e) {
+            return new ResultTest(inputTest, null, true);
         }
     }
 }
