@@ -1,7 +1,7 @@
 enum StatusTest {
-    PASSED,
-    FAILED,
-    CRASHED
+    PASSED = 0,
+    FAILED = 1,
+    CRASHED = 2
 }
 
 public class ResultTest {
@@ -17,5 +17,10 @@ public class ResultTest {
                 : inputTest.expectedResult.equals(receivedResult)
                 ? StatusTest.PASSED
                 : StatusTest.FAILED;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("{}", );
     }
 }
