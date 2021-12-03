@@ -10,7 +10,7 @@ public class WrapResultTestList {
     @JsonCreator
     public WrapResultTestList(
             @JsonProperty("packageId") String packageId,
-            List<ResultTest> resultTestList
+            @JsonProperty("results") List<ResultTest> resultTestList
     ) {
         this.packageId = packageId;
         this.resultTestList = resultTestList;
