@@ -16,7 +16,8 @@ import akka.stream.javadsl.Flow;
 
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
-import java.util.concurrent.Future;
+
+import scala.concurrent.Future;
 
 public class JSTestApp extends AllDirectives {
     public static void main(String[] args) throws IOException {
