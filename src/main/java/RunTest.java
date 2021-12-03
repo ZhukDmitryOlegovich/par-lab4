@@ -11,18 +11,20 @@ public class ActorTester extends AbstractActor {
 
     static public Pair<Boolean, String> execJS(
             String jscript, String functionName, Object[] params
-    ) throws ScriptException, NoSuchMethodException {
+    ) {
         try {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName(SCRIPT_ENGINE_NAME);
             engine.eval(jscript);
-            return new Pair<>((Invocable) engine).invokeFunction(functionName, params).toString();
-        } catch () {
-            
+            return new Pair<>(
+                    true,
+                    ((Invocable) engine).invokeFunction(functionName, params).toString()
+            );
+        } catch (ScriptException | NoSuchMethodException e) {
+            return new Pair<>(false, null);
         }
-
     }
 
     public ResultTest runTest(InputTest inputTest) {
-
+        execJS(inputTest.)
     }
 }
