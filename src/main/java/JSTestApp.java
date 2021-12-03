@@ -14,11 +14,12 @@ import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
+import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
 public class JSTestApp extends AllDirectives {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ActorSystem actorSystem = ActorSystem.create("js_test_app");
         ActorRef actorRef = actorSystem.actorOf(Props.create(RouterTests.class));
 
@@ -32,6 +33,11 @@ public class JSTestApp extends AllDirectives {
                 ConnectHttp.toHost("localhost", 8080),
                 materializer
         );
+        System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
+        System.in.read();
+        binding
+                .thenCompose(ServerBinding::unbind)
+                .thenAccept(unbound -> actorSystem.terminate());
     }
 
     private Route createRoute(ActorRef actorRouter) {
