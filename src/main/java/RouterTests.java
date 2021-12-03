@@ -33,7 +33,7 @@ public class RouterTests extends AbstractActor {
                         WrapInputTestList.class,
                         wrapInputTestList -> {
                             for (InputTest inputTest : wrapInputTestList.inputTestList) {
-                                routerTesters.route();
+                                routerTesters.route(, actorStorageTests);
                             }
                         }
                 );
