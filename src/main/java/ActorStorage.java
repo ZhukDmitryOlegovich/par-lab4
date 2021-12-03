@@ -13,5 +13,6 @@ public class ActorStorage extends AbstractActor {
         if (list == null) {
             list = storage.put(id, new ArrayList<>());
         }
+        list.add(resultTest);
     }
 }
