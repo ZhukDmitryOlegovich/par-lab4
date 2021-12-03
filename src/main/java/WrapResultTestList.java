@@ -15,4 +15,12 @@ public class WrapResultTestList {
         this.packageId = packageId;
         this.resultTestList = resultTestList;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "{\"packageId\":\"%s\"}",
+                packageId
+        );
+    }
 }
