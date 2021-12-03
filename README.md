@@ -7,17 +7,17 @@
       - cообщение с результатом одного теста → кладет его в локальное хранилище.
       - cообщение с запросом результата теста → отвечает сообщением с результатом всех тестов для заданного packageId
    - актор который исполняет один тест из пакета.
-   Для исполнения JS кода можно воспользоваться следующим примером
-   ```java
-   ScriptEngine engine = new
-   ScriptEngineManager().getEngineByName("nashorn");
-   engine.eval(jscript);
-   Invocable invocable = (Invocable) engine;
-   return invocable.invokeFunction(functionName, params).toString();
-   ```
-   После исполнения теста результат передается актору хранилищу
+      Для исполнения JS кода можно воспользоваться следующим примером
+      ```java
+      ScriptEngine engine = new
+      ScriptEngineManager().getEngineByName("nashorn");
+      engine.eval(jscript);
+      Invocable invocable = (Invocable) engine;
+      return invocable.invokeFunction(functionName, params).toString();
+      ```
+      После исполнения теста результат передается актору хранилищу
    - актор роутер
-   инициализирует актор хранилище а также пул акторов исполнителей тестов
+      инициализирует актор хранилище а также пул акторов исполнителей тестов
 3. После инициализации actor system — создаем актор роутер который в свою
 очередь создает все дочерние акторы
 4. Создаем ActorMaterializer и инициализируем http систему с помощью
