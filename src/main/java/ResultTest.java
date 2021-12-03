@@ -21,6 +21,10 @@ public class ResultTest {
 
     @Override
     public String toString() {
-        return String.format("{}", );
+        return String.format(
+                "{status:\"%s\"}",
+                statusTest.name()
+                inputTest.testName
+        );
     }
 }
