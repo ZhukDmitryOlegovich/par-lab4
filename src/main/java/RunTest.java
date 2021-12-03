@@ -1,5 +1,4 @@
 import akka.actor.AbstractActor;
-import jdk.internal.net.http.common.Pair;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -9,23 +8,33 @@ import javax.script.ScriptException;
 public class ActorTester extends AbstractActor {
     private static final String SCRIPT_ENGINE_NAME = "nashorn";
 
-    static public Pair<Boolean, String> execJS(
+    static public ResultExec execJS(
             String jscript, String functionName, Object[] params
     ) {
         try {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName(SCRIPT_ENGINE_NAME);
             engine.eval(jscript);
-            return new Pair<>(
+            return new ResultExec(
                     true,
                     ((Invocable) engine).invokeFunction(functionName, params).toString()
             );
         } catch (ScriptException | NoSuchMethodException e) {
-            return new Pair<>(false, null);
+            return new ResultExec(false, null);
         }
     }
 
     public ResultTest runTest(String jscript, String functionName, InputTest inputTest) {
-        Pair<Boolean, String> result = execJS(jscript, functionName, inputTest.params);
-        return new ResultTest(inputTest, )
+        ResultExec result = execJS(jscript, functionName, inputTest.params);
+        return new ResultTest(inputTest, result.result, !result.first);
+    }
+
+    static class ResultExec {
+        public final boolean correct;
+        public final String result;
+
+        public ResultExec(boolean correct, String result) {
+            this.correct = correct;
+            this.result = result;
+        }
     }
 }
