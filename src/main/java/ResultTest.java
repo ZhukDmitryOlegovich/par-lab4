@@ -1,5 +1,9 @@
 public class ResultTest {
-    public ResultTest(String receivedResult) {
+    public final InputTest inputTest;
+    public final String receivedResult;
 
+    public ResultTest(InputTest inputTest, String receivedResult) {
+        this.inputTest = inputTest;
+        this.receivedResult = receivedResult;
     }
 }
