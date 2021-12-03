@@ -16,6 +16,8 @@ public class ActorTester extends AbstractActor {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName(SCRIPT_ENGINE_NAME);
             engine.eval(jscript);
             return new Pair<>((Invocable) engine).invokeFunction(functionName, params).toString();
+        } catch () {
+            
         }
 
     }
