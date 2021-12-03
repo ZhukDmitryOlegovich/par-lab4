@@ -24,7 +24,7 @@ public class ActorTester extends AbstractActor {
         }
     }
 
-    public ResultTest runTest(InputTest inputTest) {
+    public ResultTest runTest(String jscript, String functionName, InputTest inputTest) {
         execJS(inputTest.)
     }
 }
