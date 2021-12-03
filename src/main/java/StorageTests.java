@@ -30,6 +30,6 @@ public class StorageTests extends AbstractActor {
     }
 
     private WrapResultTestList get(String packageId) {
-        return new WrapResultTestList(packageId, packageID, jsscript, funcName, storage.get(packageId));
+        return new WrapResultTestList(packageId, storage.get(packageId));
     }
 }
