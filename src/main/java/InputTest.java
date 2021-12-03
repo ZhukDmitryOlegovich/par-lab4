@@ -8,7 +8,8 @@ public class InputTest {
 
     @JsonCreator
     public InputTest(
-            @JsonProperty("testName") String testName, Object[] params, String expectedResult
+            @JsonProperty("testName") String testName,
+            @JsonProperty("params") Object[] params, String expectedResult
     ) {
         this.testName = testName;
         this.params = params;
