@@ -31,10 +31,10 @@ public class JSTestApp extends AllDirectives {
                 instance.createRoute(actorRef).flow(actorSystem, materializer);
         final CompletionStage<ServerBinding> bindingCompletionStage = http.bindAndHandle(
                 responseNotUsedFlow,
-                ConnectHttp.toHost("localhost", 8080),
+                ConnectHttp.toHost("localhost", 5000),
                 materializer
         );
-        System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
+        System.out.println("Server online at http://localhost:5000/\nPress RETURN to stop...");
         System.in.read();
         bindingCompletionStage
                 .thenCompose(ServerBinding::unbind)
@@ -47,7 +47,7 @@ public class JSTestApp extends AllDirectives {
                         Jackson.unmarshaller(WrapInputTestList.class),
                         wrapInputTestList -> {
                             actorRouter.tell(wrapInputTestList, ActorRef.noSender());
-                            return complete("Test started!");
+                            return complete("Test started!\n");
                         }
                 )))),
                 path("result", () -> route(get(() -> parameter("packageId", (packageId) -> {
@@ -56,7 +56,24 @@ public class JSTestApp extends AllDirectives {
                             packageId,
                             5000
                     );
-                    return completeOKWithFuture(result, Jackson.marshaller());
+
+                    while (result.value().isEmpty()) {}
+
+//                    System.out.println(result.value());
+//                    System.out.println(result.value().isEmpty());
+//                    System.out.println(result.value().get().get().toString());
+
+//                    System.out.println(1);
+//                    System.out.println(2);
+//                    Jackson.marshaller();
+//                    System.out.println(3);
+//                    System.out.println(4);
+//                    System.out.println(result);
+//                    System.out.println(result.toString());
+//                    System.out.println(result);
+                    return complete(result.value().get().get().toString());
+//                    return completeOKWithFuture(result, new Marshaller<>());
+
                 }))))
         );
     }

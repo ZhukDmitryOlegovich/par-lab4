@@ -23,10 +23,7 @@ public class StorageTests extends AbstractActor {
     }
 
     private void add(WrapResultTest wrapResultTest) {
-        Objects.requireNonNull(storage.containsKey(wrapResultTest.packageId)
-                ? storage.get(wrapResultTest.packageId)
-                : storage.put(wrapResultTest.packageId, new ArrayList<>())
-        ).add(wrapResultTest.resultTest);
+        storage.computeIfAbsent(wrapResultTest.packageId, k -> new ArrayList<>()).add(wrapResultTest.resultTest);
     }
 
     private WrapResultTestList get(String packageId) {

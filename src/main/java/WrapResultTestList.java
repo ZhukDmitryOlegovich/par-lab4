@@ -11,10 +11,14 @@ public class WrapResultTestList {
 
     @Override
     public String toString() {
-        return String.format(
-                "{\"packageId\":\"%s\",\"resultTestList\":\"%s\"}",
+        String res = String.format(
+                "{\"packageId\":\"%s\",\"resultTestList\":%s}",
                 packageId,
                 resultTestList
         );
+        System.out.println(res);
+        System.out.println(res);
+        System.out.println(res);
+        return res;
     }
 }
