@@ -8,6 +8,9 @@ public class ActorStorage extends AbstractActor {
     private final Map<String, List<ResultTest>> storage = new HashMap<>();
 
     private void setResult(String id, ResultTest resultTest) {
-        storage.get(id)
+        List<ResultTest> list = storage.get(id);
+        if (list == null) {
+            
+        }
     }
 }
