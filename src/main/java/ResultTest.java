@@ -22,9 +22,10 @@ public class ResultTest {
     @Override
     public String toString() {
         return String.format(
-                "{\"status\":\"%s\",\"inputTest\":\"%s\"}",
+                "{\"status\":\"%s\",\"inputTest\":\"%s\",\"receivedResult\":\"%s\"}",
                 statusTest.name(),
-                inputTest.testName
+                inputTest.testName,
+                receivedResult
         );
     }
 }
