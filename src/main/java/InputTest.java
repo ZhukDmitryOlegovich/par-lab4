@@ -1,6 +1,6 @@
 public class InputTest {
 
-    public InputTest {
-        
+    public InputTest(String status, ) {
+
     }
 }
