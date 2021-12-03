@@ -16,7 +16,7 @@ public class ActorTester extends AbstractActor {
         return ((Invocable) engine).invokeFunction(functionName, params).toString();
     }
 
-    public runTest(InputTest inputTest) {
-
+    public ResultTest runTest(InputTest inputTest) {
+        
     }
 }

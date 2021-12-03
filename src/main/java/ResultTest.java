@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 enum StatusTest {
     PASSED,
     FAILED,
@@ -16,7 +14,7 @@ public class ResultTest {
         this.receivedResult = receivedResult;
         this.statusTest = isCrashed
                 ? StatusTest.CRASHED
-                : Objects.equals(inputTest.expectedResult, receivedResult)
+                : inputTest.expectedResult.equals(receivedResult)
                 ? StatusTest.PASSED
                 : StatusTest.FAILED;
     }
