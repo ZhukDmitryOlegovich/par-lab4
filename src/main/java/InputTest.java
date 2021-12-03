@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InputTest {
@@ -5,6 +6,7 @@ public class InputTest {
     public final Object[] params;
     public final String expectedResult;
 
+    @JsonCreator
     public InputTest(
             @JsonProperty("testName") String testName, Object[] params, String expectedResult
     ) {
