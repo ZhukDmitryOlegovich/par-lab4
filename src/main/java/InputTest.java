@@ -1,6 +1,6 @@
 public class InputTest {
 
-    public InputTest(String status, ) {
+    public InputTest(String testName, ) {
 
     }
 }
