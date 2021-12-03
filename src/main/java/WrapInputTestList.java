@@ -4,12 +4,12 @@ public class WrapInputTestList {
     public final String packageId;
     public final String jscript;
     public final String functionName;
-    public final List<InputTest> inputTest;
+    public final List<InputTest> inputTestList;
 
-    public WrapInputTestList(String packageId, String jscript, String functionName, List<InputTest> inputTest) {
+    public WrapInputTestList(String packageId, String jscript, String functionName, List<InputTest> inputTestList) {
         this.packageId = packageId;
         this.jscript = jscript;
         this.functionName = functionName;
-        this.inputTest = inputTest;
+        this.inputTestList = inputTestList;
     }
 }

@@ -32,7 +32,9 @@ public class RouterTests extends AbstractActor {
                 .match(
                         WrapInputTestList.class,
                         wrapInputTestList -> {
-                            for ()
+                            for (InputTest inputTest : wrapInputTestList.inputTestList) {
+                                
+                            }
                         }
                 );
     }
