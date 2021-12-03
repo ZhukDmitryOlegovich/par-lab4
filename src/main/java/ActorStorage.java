@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class ActorStorage {
+import akka.actor.AbstractActor;
+
+public class ActorStorage extends AbstractActor {
 }
