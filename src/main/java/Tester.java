@@ -35,7 +35,7 @@ public class Tester extends AbstractActor {
                     wrapInputTest.packageId,
                     new ResultTest(
                             wrapInputTest.inputTest,
-                            execJS(wrapInputTest.jscript, wrapInputTest.functionName, wrapInputTest.inputTest.params),
+                            execJS(wrapInputTest.jsScript, wrapInputTest.functionName, wrapInputTest.inputTest.params),
                             false
                     )
             );
