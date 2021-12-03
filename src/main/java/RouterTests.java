@@ -47,7 +47,7 @@ public class RouterTests extends AbstractActor {
                 )
                 .match(
                         String.class,
-                        packageId -> 
+                        packageId -> actorStorageTests.tell()
                 )
                 .build();
     }
