@@ -1,7 +1,7 @@
 enum StatusTest {
-    PASSED = 0,
-    FAILED = 1,
-    CRASHED = 2
+    PASSED(0),
+    FAILED(1),
+    CRASHED(2)
 }
 
 public class ResultTest {
