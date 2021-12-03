@@ -7,7 +7,7 @@ import java.util.Map;
 public class ActorStorage extends AbstractActor {
     private final Map<String, List<ResultTest>> storage = new HashMap<>();
 
-    private void setResult() {
-
+    private void setResult(String id, ResultTest resultTest) {
+        storage.get()
     }
 }
