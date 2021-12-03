@@ -19,8 +19,9 @@ public class WrapResultTestList {
     @Override
     public String toString() {
         return String.format(
-                "{\"packageId\":\"%s\"}",
-                packageId
+                "{\"packageId\":\"%s\",\"resultTestList\":\"%s\"}",
+                packageId,
+                resultTestList
         );
     }
 }
