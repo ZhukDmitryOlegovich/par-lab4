@@ -35,7 +35,7 @@ public class JSTestApp extends AllDirectives {
         );
         System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
         System.in.read();
-        binding
+        bindingCompletionStage
                 .thenCompose(ServerBinding::unbind)
                 .thenAccept(unbound -> actorSystem.terminate());
     }
