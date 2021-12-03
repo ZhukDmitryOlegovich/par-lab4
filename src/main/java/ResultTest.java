@@ -22,8 +22,8 @@ public class ResultTest {
     @Override
     public String toString() {
         return String.format(
-                "{status:\"%s\"}",
-                statusTest.name()
+                "{\"status\":\"%s\",\"inputTest\":\"%s\"}",
+                statusTest.name(),
                 inputTest.testName
         );
     }
