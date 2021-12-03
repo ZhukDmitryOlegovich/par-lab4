@@ -13,7 +13,8 @@ public class WrapInputTestList {
     public WrapInputTestList(
             @JsonProperty("packageId") String packageId,
             @JsonProperty("jsScript") String jsScript,
-            String functionName, List<InputTest> inputTestList) {
+            @JsonProperty("functionName") String functionName,
+            List<InputTest> inputTestList) {
         this.packageId = packageId;
         this.jsScript = jsScript;
         this.functionName = functionName;
