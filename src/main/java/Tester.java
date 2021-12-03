@@ -22,10 +22,10 @@ public class Tester extends AbstractActor {
     }
 
     static private String execJS(
-            String jscript, String functionName, Object[] params
+            String jsScript, String functionName, Object[] params
     ) throws ScriptException, NoSuchMethodException {
         ScriptEngine engine = new ScriptEngineManager().getEngineByName(SCRIPT_ENGINE_NAME);
-        engine.eval(jscript);
+        engine.eval(jsScript);
         return ((Invocable) engine).invokeFunction(functionName, params).toString();
     }
 
