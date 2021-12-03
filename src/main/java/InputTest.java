@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class InputTest {
+public class InputTest {
+
+    public InputTest {
+        
+    }
 }

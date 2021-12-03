@@ -1,3 +1,5 @@
 public class ResultTest {
-    public ResultTest(String testName)
+    public ResultTest(String receivedResult) {
+
+    }
 }
