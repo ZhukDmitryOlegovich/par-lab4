@@ -14,7 +14,8 @@ public class WrapInputTestList {
             @JsonProperty("packageId") String packageId,
             @JsonProperty("jsScript") String jsScript,
             @JsonProperty("functionName") String functionName,
-            List<InputTest> inputTestList) {
+            @JsonProperty("tests") List<InputTest> inputTestList
+    ) {
         this.packageId = packageId;
         this.jsScript = jsScript;
         this.functionName = functionName;
