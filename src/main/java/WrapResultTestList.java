@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -7,7 +8,10 @@ public class WrapResultTestList {
     private final List<ResultTest> resultTestList;
 
     @JsonCreator
-    public WrapResultTestList(String packageId, List<ResultTest> resultTestList) {
+    public WrapResultTestList(
+            @JsonProperty("packageId") String packageId,
+            List<ResultTest> resultTestList
+    ) {
         this.packageId = packageId;
         this.resultTestList = resultTestList;
     }
