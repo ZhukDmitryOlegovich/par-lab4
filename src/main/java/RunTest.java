@@ -1,4 +1,5 @@
 import akka.actor.AbstractActor;
+import jdk.internal.net.http.common.Pair;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -11,9 +12,12 @@ public class ActorTester extends AbstractActor {
     static public Pair<Boolean, String> execJS(
             String jscript, String functionName, Object[] params
     ) throws ScriptException, NoSuchMethodException {
-        ScriptEngine engine = new ScriptEngineManager().getEngineByName(SCRIPT_ENGINE_NAME);
-        engine.eval(jscript);
-        return ((Invocable) engine).invokeFunction(functionName, params).toString();
+        try {
+            ScriptEngine engine = new ScriptEngineManager().getEngineByName(SCRIPT_ENGINE_NAME);
+            engine.eval(jscript);
+            return new Pair<>((Invocable) engine).invokeFunction(functionName, params).toString();
+        }
+
     }
 
     public ResultTest runTest(InputTest inputTest) {
