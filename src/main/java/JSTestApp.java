@@ -28,28 +28,21 @@ public class JSTestApp extends AllDirectives {
 
     private Route createRoute(ActorRef actorRouter) {
         return route(
-                path("test", () ->
-                        route(
-                                post(() ->
-                                        entity(Jackson.unmarshaller(MessageTestsPackage.class), message -> {
-                                            actorRouter.tell(message, ActorRef.noSender());
-                                            return complete("Test started!");
-                                        }))
-                        )),
-                path("result", () ->
-                        route(
-                                get(
-                                        () -> parameter("packageId", (packageId) -> {
-                                            Future<Object> result = Patterns.ask(
-                                                    actorRouter,
-                                                    packageId,
-                                                    5000
-                                            );
-                                            return completeOKWithFuture(result, Jackson.marshaller());
-                                        })
-                                )
-                        )
-                )
+                path("test", () -> route(post(() -> entity(
+                        Jackson.unmarshaller(WrapInputTestList.class),
+                        wrapInputTestList -> {
+                            actorRouter.tell(wrapInputTestList, ActorRef.noSender());
+                            return complete("Test started!");
+                        }
+                )))),
+                path("result", () -> route(get(() -> parameter("packageId", (packageId) -> {
+                    Future<Object> result = Patterns.ask(
+                            actorRouter,
+                            packageId,
+                            5000
+                    );
+                    return completeOKWithFuture(result, Jackson.marshaller());
+                }))))
         );
     }
 }
