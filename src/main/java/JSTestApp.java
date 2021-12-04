@@ -20,8 +20,16 @@ import java.util.concurrent.CompletionStage;
 import scala.concurrent.Future;
 
 public class JSTestApp extends AllDirectives {
+    private static final String APP_NAME = "js_test_app";
+
+    private static final String HOST = "localhost";
+    private static final int PORT = 5000;
+
+    private static final String FORMAT_SERVER_START = "Server online at http://%s:%d/\nPress RETURN to stop...\n";
+    private static final String MESSAGE_TEST_START = "Test started!\n";
+
     public static void main(String[] args) throws IOException {
-        ActorSystem actorSystem = ActorSystem.create("js_test_app");
+        ActorSystem actorSystem = ActorSystem.create(APP_NAME);
         ActorRef actorRef = actorSystem.actorOf(Props.create(RouterTests.class));
 
         final Http http = Http.get(actorSystem);
@@ -31,10 +39,10 @@ public class JSTestApp extends AllDirectives {
                 instance.createRoute(actorRef).flow(actorSystem, materializer);
         final CompletionStage<ServerBinding> bindingCompletionStage = http.bindAndHandle(
                 responseNotUsedFlow,
-                ConnectHttp.toHost("localhost", 5000),
+                ConnectHttp.toHost(HOST, PORT),
                 materializer
         );
-        System.out.println("Server online at http://localhost:5000/\nPress RETURN to stop...");
+        System.out.printf(FORMAT_SERVER_START, HOST, PORT);
         System.in.read();
         bindingCompletionStage
                 .thenCompose(ServerBinding::unbind)
@@ -47,7 +55,7 @@ public class JSTestApp extends AllDirectives {
                         Jackson.unmarshaller(WrapInputTestList.class),
                         wrapInputTestList -> {
                             actorRouter.tell(wrapInputTestList, ActorRef.noSender());
-                            return complete("Test started!\n");
+                            return complete(MESSAGE_TEST_START);
                         }
                 )))),
                 path("result", () -> route(get(() -> parameter("packageId", (packageId) -> {
@@ -57,7 +65,11 @@ public class JSTestApp extends AllDirectives {
                             5000
                     );
 
+//                    result.map(Object::toString, null);
+
                     while (result.value().isEmpty()) {}
+
+//                    result
 
 //                    System.out.println(result.value());
 //                    System.out.println(result.value().isEmpty());
@@ -71,8 +83,13 @@ public class JSTestApp extends AllDirectives {
 //                    System.out.println(result);
 //                    System.out.println(result.toString());
 //                    System.out.println(result);
-                    return complete(result.value().get().get().toString());
-//                    return completeOKWithFuture(result, new Marshaller<>());
+                    return complete(result.value().get().get().toString() + '\n');
+//                    return completeOKWithFutureString(result.map(Object::toString, null));
+//                    try {
+//                        return complete((String) Await.result(result, timeout.duration()));
+//                    } catch (Exception e) {
+//                        return complete("Timeout");
+//                    }
 
                 }))))
         );

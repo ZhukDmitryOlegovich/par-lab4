@@ -3,7 +3,7 @@ import akka.actor.AbstractActor;
 import java.util.*;
 
 public class StorageTests extends AbstractActor {
-    private final Map<String, List<ResultTest>> storage = new HashMap<>();
+    private final Map<String, ArrayList<ResultTest>> storage = new HashMap<>();
 
     @Override
     public Receive createReceive() {

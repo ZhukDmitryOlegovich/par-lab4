@@ -1,24 +1,18 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class WrapResultTestList {
     private final String packageId;
-    private final List<ResultTest> resultTestList;
+    private final ArrayList<ResultTest> resultTestList;
 
-    public WrapResultTestList(String packageId, List<ResultTest> resultTestList) {
+    public WrapResultTestList(String packageId, ArrayList<ResultTest> resultTestList) {
         this.packageId = packageId;
-        this.resultTestList = resultTestList;
+        this.resultTestList = resultTestList == null ? new ArrayList<>() : resultTestList;
     }
+
+    private final static String FORMAT = "{\"packageId\":\"%s\",\"resultTestList\":%s}";
 
     @Override
     public String toString() {
-        String res = String.format(
-                "{\"packageId\":\"%s\",\"resultTestList\":%s}",
-                packageId,
-                resultTestList
-        );
-        System.out.println(res);
-        System.out.println(res);
-        System.out.println(res);
-        return res;
+        return String.format(FORMAT, packageId, resultTestList);
     }
 }
