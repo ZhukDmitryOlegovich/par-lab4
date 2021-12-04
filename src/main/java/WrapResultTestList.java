@@ -9,7 +9,7 @@ public class WrapResultTestList {
         this.resultTestList = resultTestList == null ? new ArrayList<>() : resultTestList;
     }
 
-    private final static String FORMAT = "{\"packageId\":\"%s\",\"resultTestList\":%s}";
+    private final static String FORMAT = "{\"packageId\":\"%s\",\"tests\":%s}";
 
     @Override
     public String toString() {

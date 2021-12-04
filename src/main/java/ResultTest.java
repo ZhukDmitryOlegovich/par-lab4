@@ -19,15 +19,11 @@ public class ResultTest {
                 : StatusTest.FAILED;
     }
 
-    private final static String FORMAT = "{\"status\":\"%s\",\"testName\":\"%s\",\"receivedResult\":\"%s\"}";
+    private final static String FORMAT = "{\"status\":\"%s\",\"testName\":\"%s\","
+            + "\"expectedResult\":\"%s\",\"receivedResult\":\"%s\"}";
 
     @Override
     public String toString() {
-        return String.format(
-                FORMAT,
-                statusTest.name(),
-                inputTest.testName,
-                receivedResult
-        );
+        return String.format(FORMAT, statusTest.name(), inputTest.testName, inputTest.expectedResult, receivedResult);
     }
 }

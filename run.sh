@@ -1,6 +1,2 @@
-mvn package
-hadoop fs -rm -f -r output
-# export HADOOP_CLASSPATH=./target/hadoop-examples-1.0-SNAPSHOT.jar
-spark-submit --class App --master yarn-client --num-executors 3 ./target/spark-examples-1.0-SNAPSHOT.jar # hadoop App L_AIRPORT_ID.csv 664600583_T_ONTIME_sample.csv output
-rm -rf output
-hadoop fs -copyToLocal output
+curl -H "Content-type: application/json" -X POST -d '{"packageId":"11","jsScript":"var divideFn = function(a,b) { return a/b} ","functionName":"divideFn","tests": [{"testName":"test1","expectedResult":"2.0", "params":[2,1]},{"testName":"test2","expectedResult":"2.0","params":[4,2]}]}' http://localhost:5000/test
+curl -X GET http://localhost:5000/result?packageId=11

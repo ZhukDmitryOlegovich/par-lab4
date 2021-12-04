@@ -69,27 +69,8 @@ public class JSTestApp extends AllDirectives {
 
                     while (result.value().isEmpty()) {}
 
-//                    result
-
-//                    System.out.println(result.value());
-//                    System.out.println(result.value().isEmpty());
-//                    System.out.println(result.value().get().get().toString());
-
-//                    System.out.println(1);
-//                    System.out.println(2);
-//                    Jackson.marshaller();
-//                    System.out.println(3);
-//                    System.out.println(4);
-//                    System.out.println(result);
-//                    System.out.println(result.toString());
-//                    System.out.println(result);
                     return complete(result.value().get().get().toString() + '\n');
-//                    return completeOKWithFutureString(result.map(Object::toString, null));
-//                    try {
-//                        return complete((String) Await.result(result, timeout.duration()));
-//                    } catch (Exception e) {
-//                        return complete("Timeout");
-//                    }
+//                    return completeOKWithFutureString(result.map(o -> o + "\n", null));
 
                 }))))
         );
