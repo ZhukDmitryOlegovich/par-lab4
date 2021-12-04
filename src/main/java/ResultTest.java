@@ -1,29 +1,38 @@
-enum StatusTest {
-    PASSED,
-    FAILED,
-    CRASHED
-}
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ResultTest {
-    public final InputTest inputTest;
+    public final String testName;
+    public final String expectedResult;
     public final String receivedResult;
-    public final StatusTest statusTest;
+    public final boolean isCrashed;
 
-    public ResultTest(InputTest inputTest, String receivedResult, boolean isCrashed) {
-        this.inputTest = inputTest;
+    @JsonCreator
+    public ResultTest(
+            @JsonProperty("testName") String testName,
+            @JsonProperty("expectedResult") String expectedResult,
+            @JsonProperty("receivedResult") String receivedResult,
+            @JsonProperty("isCrashed") boolean isCrashed
+    ) {
+        this.testName = testName;
+        this.expectedResult = expectedResult;
         this.receivedResult = receivedResult;
-        this.statusTest = isCrashed
-                ? StatusTest.CRASHED
-                : inputTest.expectedResult.equals(receivedResult)
-                ? StatusTest.PASSED
-                : StatusTest.FAILED;
+        this.isCrashed = isCrashed;
     }
 
-    private final static String FORMAT = "{\"status\":\"%s\",\"testName\":\"%s\","
-            + "\"expectedResult\":\"%s\",\"receivedResult\":\"%s\"}";
+    public String getTestName() {
+        return testName;
+    }
 
-    @Override
-    public String toString() {
-        return String.format(FORMAT, statusTest.name(), inputTest.testName, inputTest.expectedResult, receivedResult);
+    public String getExpectedResult() {
+        return expectedResult;
+    }
+
+    public String getReceivedResult() {
+        return receivedResult;
+    }
+
+    public boolean getIsCrashed() {
+        return isCrashed;
     }
 }

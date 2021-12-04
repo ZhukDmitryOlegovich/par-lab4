@@ -28,6 +28,10 @@ public class JSTestApp extends AllDirectives {
     private static final String FORMAT_SERVER_START = "Server online at http://%s:%d/\nPress RETURN to stop...\n";
     private static final String MESSAGE_TEST_START = "Test started!\n";
 
+    private static final String PATH_TEST = "test";
+    private static final String PATH_RESULT = "result";
+    private static final String PARAMETER_NAME_PACKAGE_ID = "packageId";
+
     public static void main(String[] args) throws IOException {
         ActorSystem actorSystem = ActorSystem.create(APP_NAME);
         ActorRef actorRef = actorSystem.actorOf(Props.create(RouterTests.class));
@@ -51,28 +55,23 @@ public class JSTestApp extends AllDirectives {
 
     private Route createRoute(ActorRef actorRouter) {
         return route(
-                path("test", () -> route(post(() -> entity(
+                path(PATH_TEST, () -> route(post(() -> entity(
                         Jackson.unmarshaller(WrapInputTestList.class),
                         wrapInputTestList -> {
                             actorRouter.tell(wrapInputTestList, ActorRef.noSender());
                             return complete(MESSAGE_TEST_START);
                         }
                 )))),
-                path("result", () -> route(get(() -> parameter("packageId", (packageId) -> {
-                    Future<Object> result = Patterns.ask(
-                            actorRouter,
-                            packageId,
-                            5000
-                    );
-
-//                    result.map(Object::toString, null);
-
-                    while (result.value().isEmpty()) {}
-
-                    return complete(result.value().get().get().toString() + '\n');
-//                    return completeOKWithFutureString(result.map(o -> o + "\n", null));
-
-                }))))
+                path(PATH_RESULT, () -> route(get(() -> parameter(
+                        PARAMETER_NAME_PACKAGE_ID,
+                        (packageId) -> completeOKWithFuture(
+                                Patterns.ask(
+                                        actorRouter,
+                                        packageId,
+                                        5000
+                                ), Jackson.marshaller()
+                        )
+                ))))
         );
     }
 }

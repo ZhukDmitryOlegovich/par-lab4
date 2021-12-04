@@ -34,7 +34,8 @@ public class Tester extends AbstractActor {
             return new WrapResultTest(
                     wrapInputTest.packageId,
                     new ResultTest(
-                            wrapInputTest.inputTest,
+                            wrapInputTest.inputTest.testName,
+                            wrapInputTest.inputTest.expectedResult,
                             execJS(wrapInputTest.jsScript, wrapInputTest.functionName, wrapInputTest.inputTest.params),
                             false
                     )
@@ -42,7 +43,12 @@ public class Tester extends AbstractActor {
         } catch (ScriptException | NoSuchMethodException e) {
             return new WrapResultTest(
                     wrapInputTest.packageId,
-                    new ResultTest(wrapInputTest.inputTest, null, true)
+                    new ResultTest(
+                            wrapInputTest.inputTest.testName,
+                            wrapInputTest.inputTest.expectedResult,
+                            null,
+                            true
+                    )
             );
         }
     }
